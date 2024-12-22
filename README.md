@@ -1,8 +1,9 @@
 # Modèle IA de détection d'ouverture de Portail
 
-Un détecteur d'ouverture en exterieur pose divers problème de maintenance. Une caméra est cependant braqué en sa direction et c'est tout naturellement que j'ai eu l'idée de créer un modèle afin de savoir si il est ouvert ou fermé.
 
-J'ai donc pris une photo toutes les 5 minutes dans différents état, ouverture complète, ouverture pieton et fermé. Un total d'environ 350-400 photos que j'ai annotée via "Label Studio" avec le Labeling Interface ci dessous :
+Un détecteur d'ouverture en extérieur pose divers problèmes de maintenance. Une caméra est cependant braquée dans sa direction, et c'est tout naturellement que j'ai eu l'idée de créer un modèle afin de déterminer s'il est ouvert ou fermé.
+
+J'ai donc pris une photo toutes les 5 minutes dans différents états : ouverture complète, ouverture piéton et fermeture. Un total d'environ 350 à 400 photos a été annoté via "Label Studio" avec l'interface de labellisation ci-dessous :
 
 ````LABELSTUDIO
 <View>
@@ -14,7 +15,7 @@ J'ai donc pris une photo toutes les 5 minutes dans différents état, ouverture 
 </View>
 ````
 
-Ensuite, j'export la donnée depuis Label Studio dans le format YOLO (et non YOLOv8 OBB) pour la placer a 80% dans le dossier "train" et pour 20% dans le dossier "val". 
+Ensuite, j'exporte les données depuis Label Studio au format YOLO (et non YOLOv8 OBB), pour les répartir à 80 % dans le dossier "train" et à 20 % dans le dossier "val".
 
 Voici la Structure des données :
 
@@ -314,7 +315,7 @@ shell_command:
 
 ## Fichier send_ai.py
 
-Fichier a placer dans le répertoire /config de HA. Il s'occupe d'envoyer l'image a l'API du modèle puis d'update le capteur.
+Fichier à placer dans le répertoire /config de Home Assistant (HA). Il envoie l'image à l'API du modèle, puis met à jour le capteur.
 
 ````python
 import requests
