@@ -1,0 +1,29 @@
+# Étape 1 : Utiliser une image de base Python
+FROM python:3.9-slim
+
+# Étape 2 : Installer les dépendances système nécessaires
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libgl1-mesa-glx \
+    libglib2.0-0 && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Étape 3 : Créer un dossier de travail
+WORKDIR /app
+
+# Étape 4 : Installer Ultralytics (YOLOv8) et les dépendances Python
+RUN pip install --upgrade pip && \
+    pip install ultralytics && \
+    pip install opencv-python-headless ultralytics numpy
+
+# Étape 5 : Copier le script ou les modèles dans le conteneur (à adapter)
+COPY app/detect.py /app/detect.py
+COPY app/train.py /app/train.py
+COPY app/dataset /app/dataset
+COPY app/best.pt /app/best.pt
+
+# Étape 6 : Définir le point d'entrée par défaut (exécuter un script YOLOv8)
+CMD ["python", "detect.py"]
+# CMD ["sh", "-c", "python train.py && cp -r /app/runs /portail"]
+

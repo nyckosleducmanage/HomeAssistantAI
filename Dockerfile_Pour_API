@@ -1,0 +1,27 @@
+# Étape 1 : Utiliser une image de base Python
+FROM python:3.9-slim
+
+# Étape 2 : Installer les dépendances système nécessaires
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libgl1-mesa-glx \
+    libglib2.0-0 && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Étape 3 : Créer un dossier de travail
+WORKDIR /app
+
+# Étape 4 : Installer les dépendances Python
+RUN pip install --upgrade pip && \
+    pip install ultralytics fastapi uvicorn pydantic pillow opencv-python-headless python-multipart
+
+# Étape 5 : Copier les fichiers dans le conteneur
+COPY app/detect.py /app/detect.py
+COPY app/model_v1.pt /app/model_v1.pt
+
+# Étape 6 : Copier le script FastAPI
+COPY app/main.py /app/main.py
+
+# Étape 7 : Définir le point d'entrée pour démarrer l'API
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "9510"]
