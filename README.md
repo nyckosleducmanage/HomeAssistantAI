@@ -1,4 +1,4 @@
-# Modèle IA de détection d'ouverture de Portail
+# Modèle IA de détection d'ouverture de Portail pour Home Assistant
 
 
 Un détecteur d'ouverture en extérieur pose divers problèmes de maintenance. Une caméra est cependant braquée dans sa direction, et c'est tout naturellement que j'ai eu l'idée de créer un modèle afin de déterminer s'il est ouvert ou fermé.
