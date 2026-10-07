@@ -1,0 +1,15 @@
+# Photos de la camera : jamais dans le repo (repo public)
+NouvellesPhotos/
+work/
+
+# Sorties d'entrainement et modeles (le modele est copie dans app/ avant le build)
+runs/
+*.pt
+*.onnx
+
+# Environnement local
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+build.log
